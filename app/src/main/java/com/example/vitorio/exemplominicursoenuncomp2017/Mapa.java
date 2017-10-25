@@ -14,12 +14,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.vitorio.exemplominicursoenuncomp2017.Banco.DatabaseControl;
+import com.example.vitorio.exemplominicursoenuncomp2017.modelo.Ponto;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
 
 public class Mapa extends FragmentActivity implements OnMapReadyCallback,
         GoogleMap.OnMapClickListener, LocationListener {
@@ -87,13 +91,20 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback,
         Toast.makeText(getApplicationContext(),"Lati:"+laslocation.getLatitude()+"\nLong:: "+laslocation.getLongitude(),Toast.LENGTH_SHORT).show();
 
         LatLng posicao=new LatLng(laslocation.getLatitude(),laslocation.getLongitude());
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-2.9082825, -41.7541362);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Enucomp2017"));
-        // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(posicao));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(posicao,(float)17.5));
 
+        // Add a marker in Sydney and move the camera
+        //LatLng sydney = new LatLng(-2.9082825, -41.7541362);
+
+        DatabaseControl dc = new DatabaseControl(this);
+        ArrayList<Ponto> lista = new ArrayList<Ponto>();
+        lista = dc.carregaDados();
+
+        for(int i=0;i<lista.size();i++) {
+            mMap.addMarker(new MarkerOptions().position(new LatLng(lista.get(i).getLatitude(),lista.get(i).getLongitude())).title(lista.get(i).getNome()));
+            // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        }
     }
     public void onMapClick(LatLng latLng) {
 
