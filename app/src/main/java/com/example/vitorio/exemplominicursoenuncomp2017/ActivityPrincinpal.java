@@ -24,9 +24,17 @@ public class ActivityPrincinpal extends AppCompatActivity {
         findViewById(R.id.mapaButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityPrincinpal.this,Mapa.class);
+                Intent intent = new Intent(ActivityPrincinpal.this, Mapa.class);
                 startActivity(intent);
 
+            }
+        });
+
+        findViewById(R.id.listaButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityPrincinpal.this, TelaCadastro.class);
+                startActivity(intent);
             }
         });
 
