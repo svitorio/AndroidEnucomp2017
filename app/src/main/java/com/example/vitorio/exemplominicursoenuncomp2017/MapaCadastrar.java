@@ -2,6 +2,7 @@ package com.example.vitorio.exemplominicursoenuncomp2017;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -42,5 +43,11 @@ public class MapaCadastrar extends FragmentActivity implements OnMapReadyCallbac
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+    public void onMapClick(LatLng latLng) {
+
+        // Toast.makeText(getContext(),"Click no local do Evento!",
+        //  Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Latitude: "+latLng.latitude+"\nLongitude"+latLng.longitude,Toast.LENGTH_LONG).show();
     }
 }
