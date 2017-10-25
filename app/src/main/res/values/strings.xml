@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ExemploMinicursoEnuncomp2017</string>
+    <string name="app_name_tela_principal">GeoApp</string>
+    <string name="title_activity_mapa_com_locais">Map</string>
 </resources>
