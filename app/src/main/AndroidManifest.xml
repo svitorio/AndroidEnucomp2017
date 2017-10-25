@@ -41,13 +41,10 @@
         <activity
             android:name=".Mapa"
             android:label="@string/title_activity_mapa" />
-<<<<<<< HEAD
-        <activity android:name=".TelaCadastro"></activity>
-=======
+        <activity android:name=".TelaCadastro"/>
         <activity
             android:name=".MapaCadastrar"
-            android:label="@string/title_activity_mapa_cadastrar"></activity>
->>>>>>> 927b887a76906609ec390d83927b3b1d130d38b0
+            android:label="@string/title_activity_mapa_cadastrar"/>
     </application>
 
 </manifest>
