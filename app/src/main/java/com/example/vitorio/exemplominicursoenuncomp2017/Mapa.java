@@ -1,10 +1,14 @@
 package com.example.vitorio.exemplominicursoenuncomp2017;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.provider.SyncStateContract;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +22,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class Mapa extends FragmentActivity implements OnMapReadyCallback,
-        GoogleMap.OnMapClickListener,LocationListener {
+        GoogleMap.OnMapClickListener, LocationListener {
 
     private GoogleMap mMap;
     private LocationManager locationManager;
@@ -54,7 +58,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback,
 
             String provider = locationManager.getBestProvider(criteria, true);
 
-            Toast.makeText(getApplicationContext(), "Provider: "+provider, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Provider: " + provider, Toast.LENGTH_LONG).show();
 
             mMap = googleMap;
 
@@ -63,18 +67,33 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback,
             mMap.getUiSettings().setZoomControlsEnabled(true);
 
             mMap.setMyLocationEnabled(true);
-        }catch (SecurityException ex){
+        } catch (SecurityException ex) {
 
-            Log.e("TAG","Error",ex);
+            Log.e("TAG", "Error", ex);
         }
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        for(int x=0;x<100;x++) {
-            LatLng sydney = new LatLng(-2.9082825+x, -41.7541362+x);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Enucomp2017"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        final Location laslocation;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
         }
+        laslocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        Toast.makeText(getApplicationContext(),"Lati:"+laslocation.getLatitude()+"\nLong:: "+laslocation.getLongitude(),Toast.LENGTH_SHORT).show();
+
+        LatLng posicao=new LatLng(laslocation.getLatitude(),laslocation.getLongitude());
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(-2.9082825, -41.7541362);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Enucomp2017"));
+        // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(posicao));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(posicao,(float)17.5));
+
     }
     public void onMapClick(LatLng latLng) {
 
