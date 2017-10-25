@@ -25,6 +25,7 @@
 
 
         <Button
+            android:id="@+id/cadastroButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
@@ -33,6 +34,7 @@
             android:text="Cadastrar Local"/>
 
         <Button
+            android:id="@+id/mapaButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
@@ -41,7 +43,7 @@
             android:text="Mostrar Mapa"/>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/listaButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
