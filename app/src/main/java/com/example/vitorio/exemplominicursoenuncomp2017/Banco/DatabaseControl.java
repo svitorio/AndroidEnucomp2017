@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.vitorio.exemplominicursoenuncomp2017.modelo.Ponto;
+
 
 /**
  * Created by desenvolverdor on 03/05/17.
@@ -18,16 +20,16 @@ public class DatabaseControl{
     public DatabaseControl(Context context) {
             database = new CreateDatabase(context);
     }
-    public String insertData(String name, float lat, float lon){
+    public String insertData(Ponto ponto){
         ///int birthday
         ContentValues valores;
         long resultado;
 
         db = database.getWritableDatabase();
         valores = new ContentValues();
-        valores.put(CreateDatabase.NAME_LOCAL, name);
-        valores.put(CreateDatabase.LATITUDE, lat);
-        valores.put(CreateDatabase.LONGITUDE, lon);
+        valores.put(CreateDatabase.NAME_LOCAL,ponto.getNome());
+        valores.put(CreateDatabase.LATITUDE, ponto.getLatitude());
+        valores.put(CreateDatabase.LONGITUDE, ponto.getLongitude());
 
       //  valores.put(CreateDatabase.DATE_BIRTHDAY, birthday);
 

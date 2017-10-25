@@ -1,6 +1,7 @@
 package com.example.vitorio.exemplominicursoenuncomp2017;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.vitorio.exemplominicursoenuncomp2017.Banco.DatabaseControl;
 import com.example.vitorio.exemplominicursoenuncomp2017.modelo.Ponto;
 
 import java.util.ArrayList;
@@ -26,6 +28,9 @@ public class TelaCadastro extends AppCompatActivity {
         listaDeCadastro = (ListView) findViewById(R.id.list_view);
 
         ArrayList<Ponto> listaDePontosCadastrados = new ArrayList<>();
+        DatabaseControl dc = new DatabaseControl(this);
+
+        Cursor dados = dc.carregaDados();
         listaDePontosCadastrados.add(new Ponto("Laboratório 813", 1234567, 1234567));
         listaDePontosCadastrados.add(new Ponto("Biblioteca", 1234567, 1234567));
         listaDePontosCadastrados.add(new Ponto("Auditório Novo", 1234567, 1234567));
