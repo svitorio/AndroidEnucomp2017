@@ -10,5 +10,7 @@ public class ActivityPrincinpal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_princinpal);
 
+        System.exit(1);
+
     }
 }
