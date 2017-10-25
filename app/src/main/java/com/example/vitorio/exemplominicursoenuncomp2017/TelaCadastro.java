@@ -43,6 +43,6 @@ public class TelaCadastro extends AppCompatActivity {
         databaseControl.insertData(new Ponto(nomeLocal, latitudeFloat, longitudeFloat));
 
         Toast.makeText(this, "Cadastro realizado!", Toast.LENGTH_SHORT).show();
-        finish();   
+        finish();
     }
 }

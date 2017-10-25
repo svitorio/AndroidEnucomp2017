@@ -30,9 +30,6 @@ public class TelaListar extends AppCompatActivity {
         DatabaseControl dc = new DatabaseControl(this);
 
         listaDePontosCadastrados = dc.carregaDados();
-        listaDePontosCadastrados.add(new Ponto("Laboratório 813", 1234567, 1234567));
-        listaDePontosCadastrados.add(new Ponto("Biblioteca", 1234567, 1234567));
-        listaDePontosCadastrados.add(new Ponto("Auditório Novo", 1234567, 1234567));
 
 
         TelaCadastroAdapter adapter = new TelaCadastroAdapter(listaDePontosCadastrados, this);
