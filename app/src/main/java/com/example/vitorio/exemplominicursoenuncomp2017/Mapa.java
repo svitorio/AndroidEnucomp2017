@@ -101,8 +101,21 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback,
         ArrayList<Ponto> lista = new ArrayList<Ponto>();
         lista = dc.carregaDados();
 
+
+        //mMap.addMarker(new MarkerOptions().position(sydney).title("Casa Stark"));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
         for(int i=0;i<lista.size();i++) {
-            mMap.addMarker(new MarkerOptions().position(new LatLng(lista.get(i).getLatitude(),lista.get(i).getLongitude())).title(lista.get(i).getNome()));
+            LatLng sydney = new LatLng(lista.get(i).getLatitude(),lista.get(i).getLongitude());
+
+
+            MarkerOptions marker = new MarkerOptions();
+            marker.position(sydney);
+            marker.title(lista.get(i).getNome());
+            mMap.addMarker(marker);
+
+
+            //mMap.addMarker(new MarkerOptions().position(new LatLng(lista.get(i).getLatitude(),lista.get(i).getLongitude())).title(lista.get(i).getNome()));
             // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         }
     }
