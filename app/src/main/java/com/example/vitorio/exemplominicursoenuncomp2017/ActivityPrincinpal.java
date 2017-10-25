@@ -1,9 +1,7 @@
 package com.example.vitorio.exemplominicursoenuncomp2017;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,7 +31,7 @@ public class ActivityPrincinpal extends AppCompatActivity {
         findViewById(R.id.listaButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityPrincinpal.this, TelaCadastro.class);
+                Intent intent = new Intent(ActivityPrincinpal.this, TelaListar.class);
                 startActivity(intent);
             }
         });

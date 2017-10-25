@@ -76,7 +76,7 @@ public class DatabaseControl{
         }
 
         db.close();
-        return list;    
+        return list;
     }
     // Metodo Exemplo
     /*
