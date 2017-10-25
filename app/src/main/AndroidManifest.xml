@@ -43,6 +43,7 @@
             android:name=".Mapa"
             android:label="@string/title_activity_mapa" />
         <activity android:name=".TelaListar"/>
+        <activity android:name=".TelaCadastro"/>
         <activity
             android:name=".MapaCadastrar"
             android:label="@string/title_activity_mapa_cadastrar" />

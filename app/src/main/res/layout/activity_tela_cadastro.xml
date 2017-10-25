@@ -9,17 +9,54 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="12dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nome do Local:"/>
+            android:text="Nome do Local:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
         <EditText
+            android:id="@+id/cadastroNomeLocal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"/>
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Latitude:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+        <EditText
+            android:id="@+id/cadastroLatitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Longitude:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+        <EditText
+            android:id="@+id/cadastroLongitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+
+        <Button
+            android:id="@+id/botaoCadastrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:text="Cadastrar Local"/>
 
     </LinearLayout>
 

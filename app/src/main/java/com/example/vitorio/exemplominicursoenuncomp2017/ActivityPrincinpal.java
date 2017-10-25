@@ -36,6 +36,13 @@ public class ActivityPrincinpal extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.cadastroButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityPrincinpal.this, TelaCadastro.class));
+            }
+        });
+
     }
     /*public void showFragment(Fragment frag, String name){
 
