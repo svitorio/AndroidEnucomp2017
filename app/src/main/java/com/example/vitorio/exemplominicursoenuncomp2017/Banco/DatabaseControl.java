@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.vitorio.exemplominicursoenuncomp2017.modelo.Ponto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by desenvolverdor on 03/05/17.
@@ -42,18 +45,65 @@ public class DatabaseControl{
             return "Registro Inserido com sucesso";
 
     }
-    public Cursor carregaDados(){
+    public ArrayList<Ponto> carregaDados(){
         Cursor cursor;
+        //String[] campos =  {database.ID,database.NAME_LOCAL,database.LATITUDE,database.LONGITUDE};
+        //db = database.getReadableDatabase();
+        //cursor = db.query(database.TABLE, campos, null, null, null, null, null, null);
+
+        //if(cursor!=null){
+         //   cursor.moveToFirst();
+        //}
+
+        ArrayList<Ponto> list = new ArrayList<Ponto>();
         String[] campos =  {database.ID,database.NAME_LOCAL,database.LATITUDE,database.LONGITUDE};
         db = database.getReadableDatabase();
         cursor = db.query(database.TABLE, campos, null, null, null, null, null, null);
+        //Cursor cursor = bd.query("usuario", colunas, null, null, null, null, "nome ASC");
 
-        if(cursor!=null){
+        if(cursor.getCount() > 0){
             cursor.moveToFirst();
+
+            do{
+
+                Ponto p = new Ponto();
+                p.setNome(cursor.getString(1));
+                p.setLatitude(cursor.getLong(2));
+                p.setLongitude(cursor.getLong(3));
+                list.add(p);
+
+            }while(cursor.moveToNext());
         }
+
         db.close();
-        return cursor;
+        return list;    
     }
+    // Metodo Exemplo
+    /*
+    public List<Usuario> buscar(){
+        List<Usuario> list = new ArrayList<Usuario>();
+        String[] colunas = new String[]{"_id", "nome", "email"};
+
+        Cursor cursor = bd.query("usuario", colunas, null, null, null, null, "nome ASC");
+
+        if(cursor.getCount() > 0){
+            cursor.moveToFirst();
+
+            do{
+
+                Usuario u = new Usuario();
+                u.setId(cursor.getLong(0));
+                u.setNome(cursor.getString(1));
+                u.setEmail(cursor.getString(2));
+                list.add(u);
+
+            }while(cursor.moveToNext());
+        }
+
+        return(list);
+    }
+    */
+
     public Cursor carregaDadoById(int id){
         Cursor cursor;
         String[] campos =  {database.ID,database.NAME_LOCAL,database.LATITUDE,database.LONGITUDE};

@@ -9,6 +9,7 @@ public class Ponto {
     private String nome;
     private float latitude, longitude;
 
+    public Ponto(){}
     public Ponto(String nome, float latitude, float longitude) {
         this.nome = nome;
         this.latitude = latitude;
