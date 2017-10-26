@@ -50,14 +50,26 @@
             android:layout_height="wrap_content"
             android:inputType="textUri"/>
 
-        <Button
-            android:id="@+id/botaoCadastrar"
+        <TableRow
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="12dp"
-            android:text="Cadastrar Local"/>
+            android:layout_height="wrap_content">
 
+            <Button
+                android:id="@+id/botaoCadastrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:text="Cadastrar Local"/>
+
+            <Button android:id="@+id/botaoCoordenadas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:text="Inserir Coordenads Mapa"/>
+
+        </TableRow>
     </LinearLayout>
 
 </ScrollView>

@@ -65,8 +65,8 @@ public class TelaListar extends AppCompatActivity {
             //final View result;
 
             String nomeDoLocal = getItem(position).getNome();
-            String latitude = Float.toString( getItem(position).getLatitude() );
-            String longitude = Float.toString( getItem(position).getLongitude() );
+            String latitude = Double.toString( getItem(position).getLatitude() );
+            String longitude = Double.toString( getItem(position).getLongitude() );
 
             if (convertView == null) {
 

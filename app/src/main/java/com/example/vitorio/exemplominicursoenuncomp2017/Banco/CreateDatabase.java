@@ -30,7 +30,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 + NAME_USER + "text not null,"
                 + EMAIL + "text not null);";
         //+ DATE_BIRTHDAY + "integer"*/
-        db.execSQL("Create table "+TABLE+"("+ID+" integer primary key autoincrement,"+NAME_LOCAL+" text not null,"+LATITUDE+" real not null,"+LONGITUDE+" real not null);");
+        db.execSQL("Create table "+TABLE+"("+ID+" integer primary key autoincrement,"+NAME_LOCAL+" text not null,"+LATITUDE+" double not null,"+LONGITUDE+" double not null);");
     }
 
     @Override

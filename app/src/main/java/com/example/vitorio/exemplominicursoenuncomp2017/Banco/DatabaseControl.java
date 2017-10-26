@@ -68,8 +68,8 @@ public class DatabaseControl{
 
                 Ponto p = new Ponto();
                 p.setNome(cursor.getString(1));
-                p.setLatitude(cursor.getLong(2));
-                p.setLongitude(cursor.getLong(3));
+                p.setLatitude(cursor.getDouble(2));
+                p.setLongitude(cursor.getDouble(3));
                 list.add(p);
 
             }while(cursor.moveToNext());

@@ -23,6 +23,7 @@ public class ActivityPrincinpal extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ActivityPrincinpal.this, Mapa.class);
+                intent.putExtra("coordenadas","0");
                 startActivity(intent);
 
             }
@@ -39,7 +40,10 @@ public class ActivityPrincinpal extends AppCompatActivity {
         findViewById(R.id.cadastroButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ActivityPrincinpal.this, TelaCadastro.class));
+                Intent intent = new Intent(ActivityPrincinpal.this, TelaCadastro.class);
+                intent.putExtra("nome","");
+                startActivity(intent);
+
             }
         });
 

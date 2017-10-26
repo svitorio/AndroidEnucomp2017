@@ -1,7 +1,10 @@
 package com.example.vitorio.exemplominicursoenuncomp2017;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -30,6 +33,8 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback,
 
     private GoogleMap mMap;
     private LocationManager locationManager;
+    int escolha;
+    String nome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,10 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        Intent intent = getIntent();
+        escolha = Integer.parseInt(intent.getStringExtra("coordenadas"));
+        nome = intent.getStringExtra("nome");
     }
 
 
@@ -104,27 +113,64 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback,
 
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Casa Stark"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
-        for(int i=0;i<lista.size();i++) {
-            LatLng sydney = new LatLng(lista.get(i).getLatitude(),lista.get(i).getLongitude());
-
-
-            MarkerOptions marker = new MarkerOptions();
-            marker.position(sydney);
-            marker.title(lista.get(i).getNome());
-            mMap.addMarker(marker);
+        if(escolha==0) {
+            for (int i = 0; i < lista.size(); i++) {
+                LatLng sydney = new LatLng(lista.get(i).getLatitude(), lista.get(i).getLongitude());
 
 
-            //mMap.addMarker(new MarkerOptions().position(new LatLng(lista.get(i).getLatitude(),lista.get(i).getLongitude())).title(lista.get(i).getNome()));
-            // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+                MarkerOptions marker = new MarkerOptions();
+                marker.position(sydney);
+                marker.title(lista.get(i).getNome());
+                mMap.addMarker(marker);
+
+
+                //mMap.addMarker(new MarkerOptions().position(new LatLng(lista.get(i).getLatitude(),lista.get(i).getLongitude())).title(lista.get(i).getNome()));
+                // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            }
+        } else if (escolha==1){
+            Toast.makeText(this, "Toque em Algum Ponto do Mapa?", Toast.LENGTH_SHORT).show();
         }
     }
     public void onMapClick(LatLng latLng) {
 
         // Toast.makeText(getContext(),"Click no local do Evento!",
         //  Toast.LENGTH_SHORT).show();
-        Toast.makeText(getApplicationContext(),"Latitude: "+latLng.latitude+"\nLongitude"+latLng.longitude,Toast.LENGTH_LONG).show();
-        Log.i("Aaa","Latitude: "+latLng.latitude+"\nLongitude"+latLng.longitude);
+
+
+        if(1 == escolha){
+            showMessageDialog(""+latLng.latitude,""+latLng.longitude);
+        }
+        else {
+            Toast.makeText(getApplicationContext(),"Latitude: "+latLng.latitude+"\nLongitude"+latLng.longitude,Toast.LENGTH_LONG).show();
+            Log.i("Aaa","Latitude: "+latLng.latitude+"\nLongitude"+latLng.longitude);
+        }
+    }
+    private void showMessageDialog(final String lat,final String lon) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Coordeanadas");
+        //alertDialog.setIcon();
+        alertDialog.setMessage("Tem certeza que são essas as Coordenadas?");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Comfirmar",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intentcad = new Intent(Mapa.this,TelaCadastro.class);
+                        intentcad.putExtra("latitude",lat);
+                        intentcad.putExtra("longitude",lon);
+                        intentcad.putExtra("nome", nome);
+                        startActivity(intentcad);
+                        dialog.dismiss();
+                        onBackPressed();
+                        finish();
+                    }
+                });
+        alertDialog.show();
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancelar",
+                new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int which){
+                        dialog.dismiss();
+                        onBackPressed();
+                    }
+                });
     }
 
     @Override
