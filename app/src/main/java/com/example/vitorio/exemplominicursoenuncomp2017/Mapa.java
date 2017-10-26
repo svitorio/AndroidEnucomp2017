@@ -99,9 +99,6 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback,
         laslocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         Toast.makeText(getApplicationContext(),"Lati:"+laslocation.getLatitude()+"\nLong:: "+laslocation.getLongitude(),Toast.LENGTH_SHORT).show();
 
-        LatLng posicao=new LatLng(laslocation.getLatitude(),laslocation.getLongitude());
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(posicao));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(posicao,(float)17.5));
 
         // Add a marker in Sydney and move the camera
         //LatLng sydney = new LatLng(-2.9082825, -41.7541362);
@@ -114,6 +111,9 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback,
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Casa Stark"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         if(escolha==0) {
+            LatLng posicao=new LatLng(laslocation.getLatitude(),laslocation.getLongitude());
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(posicao));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(posicao,(float)17.5));
             for (int i = 0; i < lista.size(); i++) {
                 LatLng sydney = new LatLng(lista.get(i).getLatitude(), lista.get(i).getLongitude());
 
@@ -129,6 +129,17 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback,
             }
         } else if (escolha==1){
             Toast.makeText(this, "Toque em Algum Ponto do Mapa?", Toast.LENGTH_SHORT).show();
+        }
+        else if (escolha==2){
+            Intent intent = getIntent();
+            double lat = Double.parseDouble(intent.getStringExtra("latitude"));
+            double lon = Double.parseDouble(intent.getStringExtra("longitude"));
+            LatLng posicao=new LatLng(lat,lon);
+            MarkerOptions marker = new MarkerOptions();
+            marker.position(posicao);
+            marker.title(intent.getStringExtra("nome"));
+            mMap.addMarker(marker);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(posicao, (float)17.5));
         }
     }
     public void onMapClick(LatLng latLng) {

@@ -1,6 +1,9 @@
 package com.example.vitorio.exemplominicursoenuncomp2017;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -36,13 +39,44 @@ public class TelaListar extends AppCompatActivity {
         listaDeCadastro.setAdapter(adapter);
         listaDeCadastro.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(TelaListar.this, "Clicou no item " + position +": " + listaDePontosCadastrados.get(position).getNome(), Toast.LENGTH_SHORT).show();
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                irponto(listaDePontosCadastrados.get(position).getLatitude(), listaDePontosCadastrados.get(position).getLongitude(),listaDePontosCadastrados.get(position).getNome());
             }
+
         });
 
-    }
 
+    }
+    private void irponto(final double lat, final double lon,final String nome){
+
+            final Intent intentcad = new Intent(TelaListar.this,Mapa.class);
+            intentcad.putExtra("latitude",""+lat);
+            intentcad.putExtra("longitude",""+lon);
+            intentcad.putExtra("nome", nome);
+            intentcad.putExtra("coordenadas","2");
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Ponto");
+            //alertDialog.setIcon();
+            alertDialog.setMessage("Ir para Ponto selecionado?");
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Sim",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            startActivity(intentcad);
+                            dialog.dismiss();
+                            onBackPressed();
+                            finish();
+                        }
+                    });
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Não",
+                    new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface dialog, int which){
+                            dialog.dismiss();
+                            onBackPressed();
+                        }
+                    });
+            alertDialog.show();
+    }
     private class TelaCadastroAdapter extends ArrayAdapter<Ponto> {
 
         public TelaCadastroAdapter(ArrayList<Ponto> data, Activity activity) {
