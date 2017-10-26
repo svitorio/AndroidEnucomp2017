@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.vitorio.exemplominicursoenuncomp2017.Banco.DatabaseControl;
 import com.example.vitorio.exemplominicursoenuncomp2017.modelo.Ponto;
@@ -26,15 +28,18 @@ public class TelaListar extends AppCompatActivity {
 
         listaDeCadastro = (ListView) findViewById(R.id.list_view);
 
-        ArrayList<Ponto> listaDePontosCadastrados = new ArrayList<>();
         DatabaseControl dc = new DatabaseControl(this);
-
-        listaDePontosCadastrados = dc.carregaDados();
-
+        final ArrayList<Ponto> listaDePontosCadastrados = dc.carregaDados();
 
         TelaCadastroAdapter adapter = new TelaCadastroAdapter(listaDePontosCadastrados, this);
 
         listaDeCadastro.setAdapter(adapter);
+        listaDeCadastro.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(TelaListar.this, "Clicou no item " + position +": " + listaDePontosCadastrados.get(position).getNome(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
