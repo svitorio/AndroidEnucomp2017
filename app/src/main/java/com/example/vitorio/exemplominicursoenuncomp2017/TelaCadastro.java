@@ -11,6 +11,8 @@ import com.example.vitorio.exemplominicursoenuncomp2017.modelo.Ponto;
 
 public class TelaCadastro extends AppCompatActivity {
 
+    private EditText nomeEditText, longitudeEditText, latitudeEditText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,21 +25,33 @@ public class TelaCadastro extends AppCompatActivity {
             }
         });
 
+        nomeEditText = (EditText) findViewById(R.id.cadastroNomeLocal);
+        longitudeEditText = (EditText) findViewById(R.id.cadastroLongitude);
+        latitudeEditText = (EditText) findViewById(R.id.cadastroLatitude);
+
     }
 
     private void cadastrar() {
-        String nomeLocal = ((EditText) findViewById(R.id.cadastroNomeLocal)).getText().toString();
-        String longitude = ((EditText) findViewById(R.id.cadastroLongitude)).getText().toString();
-        String latitude = ((EditText) findViewById(R.id.cadastroLatitude)).getText().toString();
+        String nomeLocal = nomeEditText.getText().toString();
+        String longitude = longitudeEditText.getText().toString();
+        String latitude = latitudeEditText.getText().toString();
+
+        if (nomeLocal.isEmpty()) {
+            nomeLocal = "Sem nome";
+        }
 
         float longitudeFloat = 0, latitudeFloat = 0;
 
         try {
             longitudeFloat = Float.parseFloat(longitude);
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+            longitudeEditText.setError("Longitude Inválida");
+        }
         try {
             latitudeFloat = Float.parseFloat(latitude);
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+            latitudeEditText.setError("Latitude Inválida");
+        }
 
         DatabaseControl databaseControl = new DatabaseControl(this);
         databaseControl.insertData(new Ponto(nomeLocal, latitudeFloat, longitudeFloat));

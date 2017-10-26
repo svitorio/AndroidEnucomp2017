@@ -35,7 +35,7 @@
             android:id="@+id/cadastroLatitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"/>
+            android:inputType="textUri"/>
 
 
         <TextView
@@ -48,7 +48,7 @@
             android:id="@+id/cadastroLongitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"/>
+            android:inputType="textUri"/>
 
         <Button
             android:id="@+id/botaoCadastrar"
